@@ -20,13 +20,23 @@ let counter = 0;
 
 app.get('/', function(req, res) {
 	res.render('index', {
-		counter
+		// counter
 	});
 });
 
-app.post('/count', function(req, res) {
-	counter++;
-	res.redirect('/')
+app.post('/buy-medium', function(req, res) {
+	
+	res.render('info')
+});
+
+app.post('/buy-large', function(req, res) {
+	
+	res.render('info')
+});
+
+app.post('/buy-small', function(req, res) {
+	
+	res.render('info')
 });
 
 
