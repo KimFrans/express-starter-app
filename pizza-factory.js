@@ -122,8 +122,7 @@ module.exports = function pizzaOrderingOnline(){
         largePizza,
         totalPizzas,
         removeTotal,
-        
-
+    
     }
 
 }
