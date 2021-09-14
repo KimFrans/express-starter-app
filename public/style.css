@@ -65,13 +65,22 @@ button {
 	margin-left: 15%;
 } */
 
+button{
+	padding: 1em;
+	margin: 1em;
+	font-size: 1em;
+	background-color: #3FA9E2;
+	border-radius: 0.25em;
+	border: 0 solid snow;
+	color: snow;
+}
 
 body {
 	background: white;
 	font-family: arial, sans-serif;
 	background-color: #3FA9E2;
 	font-size: 0.75em;
-  }
+}
 
 .btn {
 	padding: 1em;

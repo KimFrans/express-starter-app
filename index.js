@@ -1,8 +1,11 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
+const bodyParser = require('body-parser');
+const PizzaService = require('./pizza-factory');
 
 const app = express();
-const PORT =  process.env.PORT || 3017;
+const pizzaOnline = PizzaService()
+const PORT =  process.env.PORT || 3016;
 
 // enable the req.body object - to allow us to use HTML forms
 app.use(express.json());
@@ -25,19 +28,70 @@ app.get('/', function(req, res) {
 });
 
 app.post('/buy-medium', function(req, res) {
-	
-	res.render('info')
+	var pizzaType = req.body.PizzaS;
+	pizzaOnline.buyMediumPizza(pizzaType)
+	res.render('index',{
+		smallTotal: pizzaOnline.smallPizza(),
+		mediumTotal: pizzaOnline.mediumPizza(),
+		largeTotal: pizzaOnline.largePizza(),
+		grandTotal : pizzaOnline.totalPizzas(),
+		// quantity : pizzaOnline.showSmallQuantity()
+	})
 });
 
 app.post('/buy-large', function(req, res) {
-	
-	res.render('info')
+	var pizzaType = req.body.PizzaS;
+	pizzaOnline.buyLargePizza(pizzaType)
+	res.render('index',{
+		smallTotal: pizzaOnline.smallPizza(),
+		mediumTotal: pizzaOnline.mediumPizza(),
+		largeTotal: pizzaOnline.largePizza(),
+		grandTotal: pizzaOnline.totalPizzas()
+	})
 });
 
 app.post('/buy-small', function(req, res) {
-	
-	res.render('info')
+	var pizzaType = req.body.PizzaS;
+	// console.log(pizzaType)
+	pizzaOnline.buySmallPizza(pizzaType)
+	res.render('index',{
+		smallTotal: pizzaOnline.smallPizza(),
+		mediumTotal: pizzaOnline.mediumPizza(),
+		largeTotal: pizzaOnline.largePizza(),
+		grandTotal: pizzaOnline.totalPizzas()
+	})
+	// console.log(pizzaOnline.smallPizza())
 });
+
+app.post('/delete-small', function(req, res){
+	pizzaOnline.removeSmallPizza()
+	res.render('index',{
+		smallTotal: pizzaOnline.deleteSmallPizza(),
+		mediumTotal: pizzaOnline.mediumPizza(),
+		largeTotal: pizzaOnline.largePizza(),
+		grandTotal: pizzaOnline.totalPizzas()
+	})
+})
+
+app.post('/delete-medium', function(req, res){
+	pizzaOnline.removeMediumPizza()
+	res.render('index',{
+		smallTotal: pizzaOnline.smallPizza(),
+		mediumTotal: pizzaOnline.deleteMediumPizza(),
+		largeTotal: pizzaOnline.largePizza(),
+		grandTotal: pizzaOnline.totalPizzas()
+	})
+})
+
+app.post('/delete-large', function(req, res){
+	pizzaOnline.removeLargePizza()
+	res.render('index',{
+		smallTotal: pizzaOnline.smallPizza(),
+		mediumTotal: pizzaOnline.mediumPizza(),
+		largeTotal: pizzaOnline.deleteLargepizza(),
+		grandTotal: pizzaOnline.totalPizzas()
+	})
+})
 
 
 // start  the server and start listening for HTTP request on the PORT number specified...
